@@ -1,8 +1,31 @@
 # Ops Analytics Lakehouse
 
-A local medallion lakehouse (Bronze → Silver → Gold) on DuckDB. It turns messy quarterly Excel workbooks and an ERP extract into clean, typed Parquet files for Power BI.
+**This is a sanitized copy of a project built for a finance & operations analytics team. Company names, data, server details and internal documents have been removed. No data is included, and all data files are gitignored.**
 
-> This is a sanitized copy of a project built for a finance & operations analytics team. Company names, data, server details and internal documents have been removed. **No data is included**, and all data files are gitignored.
+## Project structure
+
+```
+.
+├── 1_Scripts/
+│   ├── pipeline_leadtime.py        # lead-time pipeline entry point
+│   ├── pipeline_item_master.py     # item-master pipeline entry point
+│   ├── Common/                     # config template, DuckDB connection helper
+│   ├── Extract/                    # fetch, Bronze loaders, ERP extract (+ Queries/)
+│   └── Transform/                  # Silver generator + Silver/Gold SQL (Queries/)
+├── 2_Data_Lakehouse/               # local storage — data files are gitignored
+│   ├── 0_Loading_Zone/
+│   ├── Master/dim_phase.csv        # hand-maintained phase master
+│   └── 3_Gold/                     # Parquet output (created on first run)
+├── 3_Documentation/
+│   ├── data_catalog.md             # Silver field-level documentation
+│   └── git_collaboration_sop.txt   # commit convention and branch workflow
+├── requirements.txt
+└── setup_environment.bat           # creates a per-machine venv and installs requirements
+```
+
+## Overview
+
+A local medallion lakehouse (Bronze → Silver → Gold) on DuckDB. It turns messy quarterly Excel workbooks and an ERP extract into clean, typed Parquet files for Power BI.
 
 **Stack:** Python · DuckDB · pandas · pyodbc (SQL Server) · Power BI (consumer) · DBeaver
 
@@ -63,27 +86,6 @@ Infor M3 (SQL Server)     ──────────────────
 - every row is read before DuckDB is touched, and an empty result fails the run instead of replacing a good Bronze table.
 
 **Fail-fast orchestration.** Each step runs as a subprocess. A non-zero exit code, or any `WARNING:` line in its output, fails the whole run. Every Parquet export is row-count checked. Copies to export folders are written under a temporary name, validated, then swapped in with `os.replace`, so readers never see a half-written file.
-
-## Project structure
-
-```
-.
-├── 1_Scripts/
-│   ├── pipeline_leadtime.py        # lead-time pipeline entry point
-│   ├── pipeline_item_master.py     # item-master pipeline entry point
-│   ├── Common/                     # config template, DuckDB connection helper
-│   ├── Extract/                    # fetch, Bronze loaders, ERP extract (+ Queries/)
-│   └── Transform/                  # Silver generator + Silver/Gold SQL (Queries/)
-├── 2_Data_Lakehouse/               # local storage — data files are gitignored
-│   ├── 0_Loading_Zone/
-│   ├── Master/dim_phase.csv        # hand-maintained phase master
-│   └── 3_Gold/                     # Parquet output (created on first run)
-├── 3_Documentation/
-│   ├── data_catalog.md             # Silver field-level documentation
-│   └── git_collaboration_sop.txt   # commit convention and branch workflow
-├── requirements.txt
-└── setup_environment.bat           # creates a per-machine venv and installs requirements
-```
 
 ## Getting started
 
