@@ -1,0 +1,31 @@
+*****git commit standard*****
+
+- feat: New transform, new table, new feature
+- fix: Bug fix, data issue fix
+- doc: Data catalog, README, comments
+- chore: Config, gitignore, dependencies
+- refactor: Code restructure without changing logic
+- test: Test queries, data validation
+
+feat: add silver transform for lead time deduplication
+fix: handle null values in supplier column
+doc: update data catalog for silver layer tables
+chore: add lakehouse.db to gitignore
+refactor: simplify column normalization logic
+test: validate row counts between bronze and silver
+
+
+*****git workflow SoP*****
+
+how to start your day:
+
+git checkout dev               # switch to dev
+git pull                       # pull latest dev from github to local machine
+git checkout feature/[name]    # switch to the branch
+git merge dev                  # merge the latest dev into branch
+
+how to end your day (or each major change):
+
+git add .                        # save all changes
+git commit -m "commit_standard"  # snapshot all changes
+git push                         #upload the snapshot to github

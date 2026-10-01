@@ -1,0 +1,10 @@
+Phase,phase_alias,phase_order,phase_group,benchmark_days,is_assumption
+POS Consolidation to Gate In,Gate in,1,Transit Leg,3,true
+Gate In to ETD,Gate in to ETD,2,Transit Leg,,false
+ETD to ETA,ETD to ETA,3,Transit Leg,,false
+ETA to Delivery,ETA to Delivery,4,Transit Leg,,false
+Delivery to Received,Deli. to rec.,5,Transit Leg,,false
+Max-Min XFTY,Max-Min xfty,6,Summary,,false
+Min XFT to Received,min xft to received.,7,Summary,,false
+Max XFT to Received,max xft to received.,8,Summary,,false
+Avg XFTY to Received,Avg total,9,Summary,,false

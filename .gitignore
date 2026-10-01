@@ -1,0 +1,27 @@
+# NEVER UPLOAD ANY ACTUAL DATA ON TO GITHUB!
+*.parquet
+*.csv
+*.xlsx
+*.json
+
+# the hand-maintained phase master is reference data, not source data
+!2_Data_Lakehouse/Master/dim_phase.csv
+
+# IGNORE DUCKDB FILES
+*.duckdb
+*.db
+
+# NEVER UPLOAD API OR CONFIG FILES
+.env
+.env.*
+!.env.example
+.vscode/
+
+#IGNORE PYTHON CACHE
+__pycache__/
+*.pyc
+.venv*/
+env/
+
+#IGNORE THE CONFIG
+config.py 
