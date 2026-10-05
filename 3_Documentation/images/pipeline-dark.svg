@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="732" viewBox="0 0 1280 732" role="img" aria-label="Pipeline diagram: Excel workbooks and Infor M3 flow through Bronze, Silver and Gold layers in DuckDB to Parquet files for Power BI">
+<rect width="1280" height="732" rx="16" fill="#161B22"/>
+<text x="25" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#E6EDF3" text-anchor="start">Ops Analytics Lakehouse</text>
+<text x="25" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#A3ACB6" text-anchor="start">Two pipelines into one DuckDB file (lakehouse.db): messy sources in, one governed star schema out.</text>
+<circle cx="1212" cy="40" r="5" fill="#E3B341"/>
+<text x="1221" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#A3ACB6" text-anchor="start">Gold</text>
+<circle cx="1144" cy="40" r="5" fill="#AEB8C2"/>
+<text x="1153" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#A3ACB6" text-anchor="start">Silver</text>
+<circle cx="1076" cy="40" r="5" fill="#D9945A"/>
+<text x="1085" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#A3ACB6" text-anchor="start">Bronze</text>
+<text x="25" y="104.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#7D8590" letter-spacing="1.2">SOURCE</text>
+<text x="237" y="104.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#7D8590" letter-spacing="1.2">INGEST</text>
+<rect x="445" y="88" width="178" height="24" rx="12" fill="#2A2019"/>
+<circle cx="461" cy="100" r="4.5" fill="#D9945A"/>
+<text x="473" y="104.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#D9945A" letter-spacing="1.2">BRONZE</text>
+<rect x="657" y="88" width="178" height="24" rx="12" fill="#1F252C"/>
+<circle cx="673" cy="100" r="4.5" fill="#AEB8C2"/>
+<text x="685" y="104.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#AEB8C2" letter-spacing="1.2">SILVER</text>
+<rect x="869" y="88" width="178" height="24" rx="12" fill="#2A2412"/>
+<circle cx="885" cy="100" r="4.5" fill="#E3B341"/>
+<text x="897" y="104.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#E3B341" letter-spacing="1.2">GOLD</text>
+<text x="1085" y="104.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#7D8590" letter-spacing="1.2">SERVE</text>
+<rect x="12" y="124" width="1256" height="244" rx="12" fill="#1C222B"/>
+<text x="25" y="147" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#E6EDF3" letter-spacing="1">LEAD TIME</text>
+<text x="112.39999999999999" y="147" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="400" fill="#7D8590" text-anchor="start">pipeline_leadtime.py</text>
+<rect x="12" y="384" width="1256" height="160" rx="12" fill="#1C222B"/>
+<text x="25" y="407" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#E6EDF3" letter-spacing="1">ITEM MASTER</text>
+<text x="129.6" y="407" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="400" fill="#7D8590" text-anchor="start">pipeline_item_master.py</text>
+<rect x="21" y="160" width="178" height="192" rx="10" fill="#0D1117" stroke="#30363D"/>
+<text x="35" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Excel workbooks</text>
+<text x="35" y="210" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Quarterly lead-time files</text>
+<text x="35" y="228" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">in several shared folders</text>
+<text x="35" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Template drifts by quarter</text>
+<rect x="233" y="160" width="178" height="192" rx="10" fill="#0D1117" stroke="#30363D"/>
+<text x="247" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Loading zone</text>
+<text x="247" y="208" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#A3ACB6" text-anchor="start">fetch_source_files.py</text>
+<text x="247" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Copies matching files</text>
+<text x="247" y="248" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Originals never modified</text>
+<rect x="445" y="160" width="178" height="192" rx="10" fill="#0D1117" stroke="#30363D"/>
+<path d="M445 170 a10 10 0 0 1 10 -10 h158 a10 10 0 0 1 10 10 v-6 h0 v0" fill="none"/>
+<rect x="446" y="161" width="176" height="4" rx="2" fill="#D9945A"/>
+<text x="459" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Raw, as landed</text>
+<text x="459" y="208" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#D9945A" text-anchor="start">bronze.*</text>
+<text x="459" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">One table per sheet tab</text>
+<text x="459" y="248" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">+ _bronze_insert_ts</text>
+<text x="459" y="266" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">+ _source_file_name</text>
+<rect x="657" y="160" width="178" height="192" rx="10" fill="#0D1117" stroke="#30363D"/>
+<path d="M657 170 a10 10 0 0 1 10 -10 h158 a10 10 0 0 1 10 10 v-6 h0 v0" fill="none"/>
+<rect x="658" y="161" width="176" height="4" rx="2" fill="#AEB8C2"/>
+<text x="671" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Generated SQL</text>
+<text x="671" y="208" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#AEB8C2" text-anchor="start">silver.leadtime_data</text>
+<text x="671" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Resolves renamed columns</text>
+<text x="671" y="248" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Date-format cascade</text>
+<text x="671" y="266" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Finds new quarters</text>
+<text x="671" y="284" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">1 row per shipment leg</text>
+<rect x="869" y="160" width="178" height="192" rx="10" fill="#0D1117" stroke="#30363D"/>
+<rect x="870" y="161" width="176" height="4" rx="2" fill="#E3B341"/>
+<text x="883" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Star schema</text>
+<text x="883" y="208" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#E3B341" text-anchor="start">gold.*</text>
+<path d="M958.0 246 V316.5" stroke="#E3B341" stroke-opacity="0.55" stroke-width="1.2" fill="none"/>
+<path d="M958.0 266.5 H953.0" stroke="#E3B341" stroke-opacity="0.55" stroke-width="1.2" fill="none"/>
+<path d="M958.0 266.5 H963.0" stroke="#E3B341" stroke-opacity="0.55" stroke-width="1.2" fill="none"/>
+<path d="M958.0 291.5 H953.0" stroke="#E3B341" stroke-opacity="0.55" stroke-width="1.2" fill="none"/>
+<path d="M958.0 291.5 H963.0" stroke="#E3B341" stroke-opacity="0.55" stroke-width="1.2" fill="none"/>
+<path d="M958.0 316.5 H953.0" stroke="#E3B341" stroke-opacity="0.55" stroke-width="1.2" fill="none"/>
+<rect x="883" y="220" width="150" height="26" rx="6" fill="#2A2412" stroke="#E3B341"/>
+<text x="958.0" y="237.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" font-weight="600" fill="#E6EDF3" text-anchor="middle">fact_leadtime</text>
+<rect x="883.0" y="257" width="70.0" height="19" rx="5" fill="#0D1117" stroke="#30363D"/>
+<text x="918.0" y="270.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" font-weight="500" fill="#A3ACB6" text-anchor="middle">dim_date</text>
+<rect x="963.0" y="257" width="70.0" height="19" rx="5" fill="#0D1117" stroke="#30363D"/>
+<text x="998.0" y="270.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" font-weight="500" fill="#A3ACB6" text-anchor="middle">dim_phase</text>
+<rect x="883.0" y="282" width="70.0" height="19" rx="5" fill="#0D1117" stroke="#30363D"/>
+<text x="918.0" y="295.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" font-weight="500" fill="#A3ACB6" text-anchor="middle">dim_wh</text>
+<rect x="963.0" y="282" width="70.0" height="19" rx="5" fill="#0D1117" stroke="#30363D"/>
+<text x="998.0" y="295.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" font-weight="500" fill="#A3ACB6" text-anchor="middle">dim_port</text>
+<rect x="883.0" y="307" width="70.0" height="19" rx="5" fill="#0D1117" stroke="#30363D"/>
+<text x="918.0" y="320.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" font-weight="500" fill="#A3ACB6" text-anchor="middle">dim_country</text>
+<text x="883" y="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#7D8590" text-anchor="start">Phases unpivoted, MD5 row key</text>
+<rect x="1081" y="160" width="178" height="192" rx="10" fill="#0D1117" stroke="#30363D"/>
+<text x="1095" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Parquet files</text>
+<text x="1095" y="208" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#A3ACB6" text-anchor="start">3_Gold/*.parquet</text>
+<text x="1095" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">6 tables for Power BI</text>
+<text x="1095" y="248" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Every report reads the</text>
+<text x="1095" y="266" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">same Gold tables</text>
+<rect x="21" y="420" width="178" height="108" rx="10" fill="#0D1117" stroke="#30363D"/>
+<text x="35" y="448" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Infor M3 ERP</text>
+<text x="35" y="468" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#A3ACB6" text-anchor="start">SQL Server</text>
+<text x="35" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Item master tables</text>
+<rect x="233" y="420" width="178" height="108" rx="10" fill="#0D1117" stroke="#30363D"/>
+<text x="247" y="448" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Read-only extract</text>
+<text x="247" y="468" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" font-weight="500" fill="#A3ACB6" text-anchor="start">extract_m3_item_master.py</text>
+<text x="247" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">One SELECT / WITH query</text>
+<text x="247" y="508" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Every column as text</text>
+<rect x="445" y="420" width="178" height="108" rx="10" fill="#0D1117" stroke="#30363D"/>
+<path d="M445 430 a10 10 0 0 1 10 -10 h158 a10 10 0 0 1 10 10 v-6 h0 v0" fill="none"/>
+<rect x="446" y="421" width="176" height="4" rx="2" fill="#D9945A"/>
+<text x="459" y="448" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Raw, as landed</text>
+<text x="459" y="468" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#D9945A" text-anchor="start">bronze.m3_item_master</text>
+<text x="459" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Landed as-is</text>
+<rect x="657" y="420" width="178" height="108" rx="10" fill="#0D1117" stroke="#30363D"/>
+<path d="M657 430 a10 10 0 0 1 10 -10 h158 a10 10 0 0 1 10 10 v-6 h0 v0" fill="none"/>
+<rect x="658" y="421" width="176" height="4" rx="2" fill="#AEB8C2"/>
+<text x="671" y="448" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Typed &amp; trimmed</text>
+<text x="671" y="468" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#AEB8C2" text-anchor="start">silver.item_master</text>
+<text x="671" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">One row per SKU</text>
+<rect x="869" y="420" width="178" height="108" rx="10" fill="#0D1117" stroke="#30363D"/>
+<path d="M869 430 a10 10 0 0 1 10 -10 h158 a10 10 0 0 1 10 10 v-6 h0 v0" fill="none"/>
+<rect x="870" y="421" width="176" height="4" rx="2" fill="#E3B341"/>
+<text x="883" y="448" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Item dimension</text>
+<text x="883" y="468" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#E3B341" text-anchor="start">gold.dim_item</text>
+<text x="883" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Shared across reports</text>
+<rect x="1081" y="420" width="178" height="108" rx="10" fill="#0D1117" stroke="#30363D"/>
+<text x="1095" y="448" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#E6EDF3" text-anchor="start">Parquet + copies</text>
+<text x="1095" y="468" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" font-weight="500" fill="#A3ACB6" text-anchor="start">dim_item.parquet</text>
+<text x="1095" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Copied to export folders</text>
+<text x="1095" y="508" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">for other consumers</text>
+<path d="M203 236 H227" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M224 232 L230 236 L224 240" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M415 236 H439" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M436 232 L442 236 L436 240" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M627 236 H651" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M648 232 L654 236 L648 240" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M839 236 H863" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M860 232 L866 236 L860 240" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1051 236 H1075" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M1072 232 L1078 236 L1072 240" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M203 474.0 H227" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M224 470.0 L230 474.0 L224 478.0" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M415 474.0 H439" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M436 470.0 L442 474.0 L436 478.0" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M627 474.0 H651" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M648 470.0 L654 474.0 L648 478.0" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M839 474.0 H863" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M860 470.0 L866 474.0 L860 478.0" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1051 474.0 H1075" stroke="#6E7681" stroke-width="1.5" fill="none"/><path d="M1072 470.0 L1078 474.0 L1072 478.0" stroke="#6E7681" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1031" y="147" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" font-weight="400" fill="#7D8590" text-anchor="end">Master/dim_phase.csv</text>
+<path d="M1039 137 V156 M1035.5 152 L1039 156 L1042.5 152" stroke="#7D8590" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1095" y="306" width="150" height="32" rx="8" fill="#1C222B" stroke="#30363D"/>
+<rect x="1107" y="322" width="4" height="8" rx="1" fill="#E3B341"/>
+<rect x="1113" y="316" width="4" height="14" rx="1" fill="#E3B341"/>
+<rect x="1119" y="319" width="4" height="11" rx="1" fill="#E3B341"/>
+<rect x="1125" y="312" width="4" height="18" rx="1" fill="#E3B341"/>
+<text x="1141" y="327" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#E6EDF3" text-anchor="start">Power BI reports</text>
+<text x="25" y="574" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#E6EDF3" letter-spacing="1">VALIDATION AT EVERY STEP</text>
+<path d="M221 570 H1259" stroke="#30363D" stroke-width="1"/>
+<path d="M23 598 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="37" y="602" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Sources are only read,</text>
+<path d="M23 618 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="37" y="622" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">never written back</text>
+<path d="M235 598 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="249" y="602" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">SELECT-only, rolled back</text>
+<path d="M235 618 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="249" y="622" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Empty result fails run</text>
+<path d="M447 598 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="461" y="602" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Lineage columns on</text>
+<path d="M447 618 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="461" y="622" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">every Bronze row</text>
+<path d="M659 598 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="673" y="602" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">26 column groups checked</text>
+<path d="M659 618 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="673" y="622" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Swapped min/max fixed</text>
+<path d="M659 638 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="673" y="642" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">NULL etd rows flagged</text>
+<path d="M871 598 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="885" y="602" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">SKU grain check fails</text>
+<path d="M871 618 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="885" y="622" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">the run on duplicates</text>
+<path d="M1083 598 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1097" y="602" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Row count Gold = Parquet</text>
+<path d="M1083 618 l3 3 l6 -7" stroke="#56C288" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1097" y="622" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#A3ACB6" text-anchor="start">Temp file + atomic swap</text>
+<rect x="12" y="660" width="1256" height="54" rx="12" fill="#0D1117" stroke="#30363D"/>
+<text x="25" y="683" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#E6EDF3" letter-spacing="1">FAIL-FAST ORCHESTRATION</text>
+<text x="25" y="702" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#A3ACB6" text-anchor="start">Each step runs as a subprocess. A non-zero exit code or any WARNING: line stops the whole run, so a bad load never reaches Power BI.</text>
+</svg>

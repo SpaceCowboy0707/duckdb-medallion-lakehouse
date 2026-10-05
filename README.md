@@ -18,6 +18,7 @@
 │   └── 3_Gold/                     # Parquet output (created on first run)
 ├── 3_Documentation/
 │   ├── data_catalog.md             # Silver field-level documentation
+│   ├── images/                     # pipeline diagram (light + dark)
 │   └── git_collaboration_sop.txt   # commit convention and branch workflow
 ├── requirements.txt
 └── setup_environment.bat           # creates a per-machine venv and installs requirements
@@ -26,6 +27,11 @@
 ## Overview
 
 A local medallion lakehouse (Bronze → Silver → Gold) on DuckDB. It turns messy quarterly Excel workbooks and an ERP extract into clean, typed Parquet files for Power BI.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="3_Documentation/images/pipeline-dark.svg">
+  <img src="3_Documentation/images/pipeline-light.svg" alt="Pipeline diagram: quarterly Excel workbooks and Infor M3 flow through Bronze, Silver and Gold layers in DuckDB to Parquet files for Power BI, with validation at every step" width="100%">
+</picture>
 
 **Stack:** Python · DuckDB · pandas · pyodbc (SQL Server) · Power BI (consumer) · DBeaver
 
@@ -36,11 +42,6 @@ A local medallion lakehouse (Bronze → Silver → Gold) on DuckDB. It turns mes
 Analysts kept the same Excel files in several shared folders, and every Power BI model re-implemented its own cleaning. This project moves the cleaning into one place, with SQL as the single source of truth. Each Power BI report then reads the same Gold tables.
 
 ## Architecture
-
-```
-Quarterly Excel workbooks ──► 0_Loading_Zone ──► bronze.*  ──► silver.leadtime_data ──► gold.fact_leadtime + dims ──► 3_Gold/*.parquet ──► Power BI
-Infor M3 (SQL Server)     ──────────────────────► bronze.m3_item_master ──► silver.item_master ──► gold.dim_item ──► 3_Gold/dim_item.parquet
-```
 
 | Layer | Where | What |
 |---|---|---|
